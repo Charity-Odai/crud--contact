@@ -10,8 +10,8 @@ class App extends Component {
     super(props)
     this.state={
       users : [
-        {name:'Charity',email:'csa@gmail.com',contact:'0245527421'},
-        {name:'Abena',email:'benna@gmail.com',contact:'0255247892'}
+        {id:1,name:'Charity',email:'csa@gmail.com',contact:'0245527421'},
+        {id:2,name:'Abena',email:'benna@gmail.com',contact:'0255247892'}
       ]
     }
   }
@@ -23,12 +23,27 @@ class App extends Component {
     console.log(this.state.users)
   }
 
+  deleteUser=(id)=>{
+      const deleteUser = this.state.users.filter((user,index)=>index !== id )
+      this.setState({
+        users: deleteUser
+      })
+  }
+
+  editUser=(uniqueid,data)=>{
+      this.setState({
+        users : this.state.users.map((everyUser)=> everyUser.id === uniqueid ? data : everyUser )
+      })
+  }
+
+
   render() {
     return (
       <Container>
         <Row>
-          <Col><AddUser newUser={this.addUser}/></Col>
-          <Col xs={8}><Users allUsers={this.state.users}/></Col>
+          <Col><AddUser newUser={this.addUser}/></Col> 
+
+          <Col xs={8}><Users allUsers={this.state.users} deleteUser={this.deleteUser} editUser={this.editUser}/></Col>
         </Row>
       </Container>
     )

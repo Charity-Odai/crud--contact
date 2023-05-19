@@ -11,9 +11,8 @@ function Users(props) {
             {
                 props.allUsers.map((user,index)=>(
                     <Col>
-                        <UserCard userData={user}/>
+                        <UserCard userData={user} sendDelete={props.deleteUser} id={index} sendEdit={props.editUser}/>
                     </Col>
-                    
                 ))
             }
         </Row>

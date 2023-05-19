@@ -3,23 +3,27 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 
-export default class AddUser extends Component {
+export default class EditUser extends Component {
         constructor(props){
             super(props)
-            this.state={name:'',email:'',contact:0}
+            this.state={
+                name: props.userData.name,
+                email: props.userData.email,
+                contact:props.userData.contact,
+                id:props.userData.id,
+            }
+
         }
 
         handleInput=(c)=>{
             this.setState({[c.target.name]:c.target.value})
         }
+
         onSubmit=(s)=>{
             s.preventDefault()
-            this.props.newUser(this.state)
-            this.setState({
-                name:'',
-                email:'',
-                contact:0
-           })
+            this.props.sendEditUser(this.state.id , this.state)
+            this.props.closeModal()
+       
         }
 
 
